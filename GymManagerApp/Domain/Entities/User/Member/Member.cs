@@ -2,6 +2,6 @@
 {
     public class Member : User
     {
-        public Membership Membership { get; set; }
+        public List<Membership> Membership { get; set; }
     }
 }

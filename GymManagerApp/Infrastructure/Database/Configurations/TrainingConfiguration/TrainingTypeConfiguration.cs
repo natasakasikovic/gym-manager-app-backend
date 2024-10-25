@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace GymManagerApp.Infrastructure.Database.Configurations
+namespace GymManagerApp.Infrastructure.Database.Configurations.TrainingConfiguration
 {
     public class TrainingTypeConfiguration : IEntityTypeConfiguration<TrainingType>
     {

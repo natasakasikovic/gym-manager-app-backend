@@ -1,6 +1,6 @@
 ﻿namespace GymManagerApp.Domain.Entities.User
 {
-    public class Trainer
-    {
-    }
+
+    public class Trainer : User { }
+
 }

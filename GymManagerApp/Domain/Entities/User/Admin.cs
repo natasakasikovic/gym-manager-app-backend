@@ -1,6 +1,4 @@
 ﻿namespace GymManagerApp.Domain.Entities.User
 {
-    public class Administrator : User
-    {
-    }
+    public class Admin : User { }
 }
