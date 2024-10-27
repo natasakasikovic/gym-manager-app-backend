@@ -2,9 +2,8 @@
 
 namespace GymManagerApp.Domain.Entities.Training
 {
-    public class Training
+    public class Training : Entity
     {
-        public int Id { get; set; }
         public TrainingType Type { get; set; }
         public Trainer Trainer { get; set; }
 

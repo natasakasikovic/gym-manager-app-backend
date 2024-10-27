@@ -2,9 +2,8 @@
 
 namespace GymManagerApp.Domain.Entities.User
 {
-    public abstract class User
+    public abstract class User : Entity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
         public Gender Gender { get; set; }
