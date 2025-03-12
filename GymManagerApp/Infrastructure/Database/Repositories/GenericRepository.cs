@@ -1,4 +1,4 @@
-﻿using GymManagerApp.Domain.Entities;
+﻿using GymManagerApp.Domain.Entities.Common;
 using GymManagerApp.Domain.RepositoryInterfaces;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,4 +1,6 @@
-﻿namespace GymManagerApp.Domain.Entities.User.Member
+﻿using GymManagerApp.Domain.Entities.Common;
+
+namespace GymManagerApp.Domain.Entities.User.Member
 {
     public class Membership : Entity
     {

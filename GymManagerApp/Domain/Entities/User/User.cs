@@ -1,4 +1,5 @@
-﻿using GymManagerApp.Domain.Enums;
+﻿using GymManagerApp.Domain.Entities.Common;
+using GymManagerApp.Domain.Enums;
 
 namespace GymManagerApp.Domain.Entities.User
 {
