@@ -1,11 +1,10 @@
 ﻿using GymManagerApp.Application.CQRS.Queries.GetTrainings;
-using GymManagerApp.Application.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GymManagerApp.Presentation.Controllers
 {
-    [Route("/api/trainings")]
+	[Route("/api/trainings")]
     public class TrainingController : BaseApiController
     {
 
@@ -16,7 +15,12 @@ namespace GymManagerApp.Presentation.Controllers
         public async Task<IActionResult> GetTrainings()
         {
             var response = await Sender.Send(new GetTrainingsQuery());   
-            return Ok(response); // TODO: make wrapper (Result.cs) 
+
+            if (response.IsFailure)
+                return Ok(response); // TODO: make HandleFailure method!
+
+            return Ok(response);
         }
+
     }
 }

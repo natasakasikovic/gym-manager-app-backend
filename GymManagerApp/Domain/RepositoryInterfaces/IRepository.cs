@@ -2,7 +2,7 @@
 
 namespace GymManagerApp.Domain.RepositoryInterfaces
 {
-    public interface IRepository<T> where T : Entity
+    public interface IRepository<T> where T : BaseEntity
     {
             Task<IEnumerable<T>> GetAll();
             Task<T?> Get(int id);

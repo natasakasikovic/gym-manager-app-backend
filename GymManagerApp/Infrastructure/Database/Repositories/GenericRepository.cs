@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GymManagerApp.Infrastructure.Database.Repositories
 {
-    public abstract class GenericRepository<T> :IRepository<T> where T : Entity
+    public abstract class GenericRepository<T> :IRepository<T> where T : BaseEntity
     {
 
         private readonly DatabaseContext _dbContext;

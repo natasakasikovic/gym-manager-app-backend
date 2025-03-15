@@ -3,7 +3,7 @@ using GymManagerApp.Domain.Enums;
 
 namespace GymManagerApp.Domain.Entities.User
 {
-    public abstract class User : Entity
+    public abstract class User : BaseEntity
     {
         public string Name { get; set; }
         public string LastName { get; set; }

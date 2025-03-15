@@ -4,7 +4,7 @@ using GymManagerApp.Domain.Entities.User.Member;
 
 namespace GymManagerApp.Domain.Entities.Training
 {
-    public class Training : Entity
+    public class Training : BaseEntity
     {
         public TrainingType Type { get; private set; }
 
@@ -18,5 +18,9 @@ namespace GymManagerApp.Domain.Entities.Training
 
         private Training() { }
 
-    }
+		public bool IsUpcoming()
+		{
+			return ScheduledAt > DateTime.UtcNow;
+		}
+	}
 }

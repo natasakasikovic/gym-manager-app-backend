@@ -3,7 +3,7 @@ using GymManagerApp.Domain.Enums;
 
 namespace GymManagerApp.Domain.Entities.Training
 {
-    public class TrainingType : Entity
+    public class TrainingType : BaseEntity
     {
         public string Name { get; private set; }
         public string Description { get; private set; }
