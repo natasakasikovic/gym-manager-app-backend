@@ -1,7 +1,6 @@
-﻿using GymManagerApp.Application.Common;
-using MediatR;
+﻿using GymManagerApp.Application.Common.CQRS;
 
 namespace GymManagerApp.Application.TrainingTypes.Queries.GetTrainingTypes
 {
-	public class GetTrainingTypesQuery : IRequest<Result<List<TrainingTypeResponse>>> {	}
+	public class GetTrainingTypesQuery : IQuery<List<TrainingTypeResponse>> {	}
 }

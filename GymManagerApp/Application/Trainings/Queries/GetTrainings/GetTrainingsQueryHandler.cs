@@ -1,4 +1,5 @@
 ﻿using GymManagerApp.Application.Common;
+using GymManagerApp.Application.Common.CQRS;
 using GymManagerApp.Application.Trainings.Queries.GetTrainings;
 using GymManagerApp.Domain.Entities.Training;
 using GymManagerApp.Domain.RepositoryInterfaces;
@@ -6,7 +7,7 @@ using MediatR;
 
 namespace GymManagerApp.Application.CQRS.Queries.GetTrainings
 {
-    public class GetTrainingsQueryHandler : IRequestHandler<GetTrainingsQuery, Result<List<TrainingResponse>>>
+    public class GetTrainingsQueryHandler : IQueryHandler<GetTrainingsQuery, List<TrainingResponse>>
     {
 
         private readonly ITrainingRepository _repository;
