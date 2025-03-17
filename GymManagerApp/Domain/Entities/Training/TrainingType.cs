@@ -11,17 +11,16 @@ namespace GymManagerApp.Domain.Entities.Training
 
         private TrainingType() { }
 
-        private TrainingType(int id, string name, string description, TrainingIntensity intensity)
-        {
-            Id = id;
+        private TrainingType(string name, string description, TrainingIntensity intensity) 
+        { 
             Name = name;
             Description = description;
             Intensity = intensity;
         }
 
-        public static TrainingType Create (int id, string name, string description, TrainingIntensity intensity)
+        public static TrainingType Create (string name, string description, TrainingIntensity intensity)
         {
-            return new TrainingType(id, name, description, intensity);
+            return new TrainingType(name, description, intensity);
         }
 
         public void Update (string name, string description, TrainingIntensity intensity)

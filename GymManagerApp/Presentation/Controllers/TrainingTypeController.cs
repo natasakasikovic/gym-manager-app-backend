@@ -1,4 +1,5 @@
-﻿using GymManagerApp.Application.TrainingTypes.Commands.UpdateTrainingType;
+﻿using GymManagerApp.Application.TrainingTypes.Commands.CreateTrainingType;
+using GymManagerApp.Application.TrainingTypes.Commands.UpdateTrainingType;
 using GymManagerApp.Application.TrainingTypes.Queries.GetTrainingTypes;
 using GymManagerApp.Presentation.Contracts;
 using MediatR;
@@ -32,6 +33,17 @@ namespace GymManagerApp.Presentation.Controllers
 				return Ok(); // TODO: replace with HandleError method
 
 			return Ok(response.Value);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> CreateTrainingType([FromBody] CreateTrainingTypeRequest request)
+		{
+			var response = await Sender.Send(new CreateTrainingTypeCommand(request.Name, request.Description, request.Intensity));
+
+			if (response.IsFailure)
+				return Ok(); // TODO: replace with HandleError method
+
+			return Ok();
 		}
 	}
 }

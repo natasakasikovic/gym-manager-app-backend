@@ -17,7 +17,8 @@ namespace GymManagerApp.Infrastructure.Database.Repositories
         public async Task Add(T entity)
         {
             _dbContext.Set<T>().Add(entity);
-        }
+			await _dbContext.SaveChangesAsync();
+		}
 
 		public async Task Update(T entity)
 		{
