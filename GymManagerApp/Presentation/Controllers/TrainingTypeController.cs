@@ -1,4 +1,5 @@
 ﻿using GymManagerApp.Application.TrainingTypes.Commands.CreateTrainingType;
+using GymManagerApp.Application.TrainingTypes.Commands.DeleteTrainingType;
 using GymManagerApp.Application.TrainingTypes.Commands.UpdateTrainingType;
 using GymManagerApp.Application.TrainingTypes.Queries.GetTrainingTypes;
 using GymManagerApp.Presentation.Contracts;
@@ -39,6 +40,17 @@ namespace GymManagerApp.Presentation.Controllers
 		public async Task<IActionResult> CreateTrainingType([FromBody] CreateTrainingTypeRequest request)
 		{
 			var response = await Sender.Send(new CreateTrainingTypeCommand(request.Name, request.Description, request.Intensity));
+
+			if (response.IsFailure)
+				return Ok(); // TODO: replace with HandleError method
+
+			return Ok();
+		}
+
+		[HttpDelete("{id}")]
+		public async Task<IActionResult> DeleteTrainingType(int id)
+		{
+			var response = await Sender.Send(new DeleteTrainingTypeCommand(id));
 
 			if (response.IsFailure)
 				return Ok(); // TODO: replace with HandleError method

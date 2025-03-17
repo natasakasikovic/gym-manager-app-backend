@@ -26,11 +26,17 @@ namespace GymManagerApp.Infrastructure.Database.Repositories
 			await _dbContext.SaveChangesAsync();
 		}
 
-		public async Task Delete(int id)
+		public async Task<bool> Delete(int id)
         {
             T entity = await Get(id);
-            if (entity is not null)
-                _dbContext.Set<T>().Remove(entity);
+
+            if (entity is null)
+                return false;
+
+            _dbContext.Set<T>().Remove(entity);
+            await _dbContext.SaveChangesAsync();
+
+            return true;
         }
 
         public async Task<T?> Get(int id)

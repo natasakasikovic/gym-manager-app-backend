@@ -8,6 +8,6 @@ namespace GymManagerApp.Domain.RepositoryInterfaces
             Task<T?> Get(int id);
             Task Add(T entity);
             Task Update(T entity);
-            Task Delete(int id);
+            Task<bool> Delete(int id);
     }
 }
