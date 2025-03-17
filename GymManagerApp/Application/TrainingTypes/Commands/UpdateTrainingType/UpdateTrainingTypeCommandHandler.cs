@@ -1,4 +1,5 @@
 ﻿using GymManagerApp.Application.Common;
+using GymManagerApp.Application.Common.CQRS;
 using GymManagerApp.Domain.Entities.Training;
 using GymManagerApp.Domain.RepositoryInterfaces;
 using MediatR;
@@ -6,7 +7,7 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace GymManagerApp.Application.TrainingTypes.Commands.UpdateTrainingType
 {
-	public class UpdateTrainingTypeCommandHandler : IRequestHandler<UpdateTrainingTypeCommand, Result<int>>
+	public class UpdateTrainingTypeCommandHandler : ICommandHandler<UpdateTrainingTypeCommand, int>
 	{
 
 		private readonly ITrainingTypeRepository _repository;

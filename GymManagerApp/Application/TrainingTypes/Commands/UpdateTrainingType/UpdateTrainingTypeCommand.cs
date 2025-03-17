@@ -1,8 +1,7 @@
-﻿using GymManagerApp.Application.Common;
+﻿using GymManagerApp.Application.Common.CQRS;
 using GymManagerApp.Domain.Enums;
-using MediatR;
 
 namespace GymManagerApp.Application.TrainingTypes.Commands.UpdateTrainingType
 {
-	public sealed record UpdateTrainingTypeCommand(int Id, string Name, string Description, TrainingIntensity Intensity) : IRequest<Result<int>> { }
+	public sealed record UpdateTrainingTypeCommand(int Id, string Name, string Description, TrainingIntensity Intensity) : ICommand<int> { }
 }

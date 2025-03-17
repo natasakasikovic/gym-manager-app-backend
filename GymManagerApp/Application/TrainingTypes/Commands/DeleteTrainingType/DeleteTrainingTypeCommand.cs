@@ -1,7 +1,6 @@
-﻿using GymManagerApp.Application.Common;
-using MediatR;
+﻿using GymManagerApp.Application.Common.CQRS;
 
 namespace GymManagerApp.Application.TrainingTypes.Commands.DeleteTrainingType
 {
-	public sealed record DeleteTrainingTypeCommand(int Id) : IRequest<Result> { }
+	public sealed record DeleteTrainingTypeCommand(int Id) : ICommand { }
 }

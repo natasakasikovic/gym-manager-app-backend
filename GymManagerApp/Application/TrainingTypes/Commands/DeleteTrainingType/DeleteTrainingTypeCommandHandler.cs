@@ -1,10 +1,10 @@
 ﻿using GymManagerApp.Application.Common;
+using GymManagerApp.Application.Common.CQRS;
 using GymManagerApp.Domain.RepositoryInterfaces;
-using MediatR;
 
 namespace GymManagerApp.Application.TrainingTypes.Commands.DeleteTrainingType
 {
-	public class DeleteTrainingTypeCommandHandler : IRequestHandler<DeleteTrainingTypeCommand, Result>
+	public class DeleteTrainingTypeCommandHandler : ICommandHandler<DeleteTrainingTypeCommand>
 	{
 		private ITrainingTypeRepository _repository;
 
@@ -15,12 +15,10 @@ namespace GymManagerApp.Application.TrainingTypes.Commands.DeleteTrainingType
 
         public async Task<Result> Handle(DeleteTrainingTypeCommand request, CancellationToken cancellationToken)
 		{
-			var type = await _repository.Get(request.Id);
+			bool isSuccess = await _repository.Delete(request.Id);
 
-			if (type is null)
+			if (!isSuccess)
 				return Result.Failure<Error>(Error.NullValue);
-
-			await _repository.Delete(request.Id);
 
 			return Result.Success();
 		}
