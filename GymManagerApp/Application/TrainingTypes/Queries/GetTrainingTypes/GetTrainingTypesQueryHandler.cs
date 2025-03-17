@@ -2,7 +2,7 @@
 using GymManagerApp.Domain.RepositoryInterfaces;
 using MediatR;
 
-namespace GymManagerApp.Application.TrainingType.Queries.GetTrainingTypes
+namespace GymManagerApp.Application.TrainingTypes.Queries.GetTrainingTypes
 {
 	public class GetTrainingTypesQueryHandler : IRequestHandler<GetTrainingTypesQuery, Result<List<TrainingTypeResponse>>>
 	{

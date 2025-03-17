@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GymManagerApp.Infrastructure.Database.Repositories
 {
-    public abstract class GenericRepository<T> :IRepository<T> where T : BaseEntity
+	public abstract class GenericRepository<T> :IRepository<T> where T : BaseEntity
     {
 
         private readonly DatabaseContext _dbContext;
@@ -19,7 +19,13 @@ namespace GymManagerApp.Infrastructure.Database.Repositories
             _dbContext.Set<T>().Add(entity);
         }
 
-        public async Task Delete(int id)
+		public async Task Update(T entity)
+		{
+			_dbContext.Set<T>().Update(entity);
+			await _dbContext.SaveChangesAsync();
+		}
+
+		public async Task Delete(int id)
         {
             T entity = await Get(id);
             if (entity is not null)
