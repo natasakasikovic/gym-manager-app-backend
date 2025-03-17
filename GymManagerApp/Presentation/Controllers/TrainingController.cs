@@ -1,4 +1,7 @@
 ﻿using GymManagerApp.Application.CQRS.Queries.GetTrainings;
+using GymManagerApp.Application.Trainings.Commands.CreateTraining;
+using GymManagerApp.Application.Trainings.Commands.UpdateTraining;
+using GymManagerApp.Presentation.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,13 +17,35 @@ namespace GymManagerApp.Presentation.Controllers
         [HttpGet]
         public async Task<IActionResult> GetTrainings()
         {
-            var response = await Sender.Send(new GetTrainingsQuery());   
+            var response = await Sender.Send(new GetUpcomingTrainingsQuery());   
 
             if (response.IsFailure)
                 return Ok(response); // TODO: make HandleFailure method!
 
-            return Ok(response);
+            return Ok(response.Value);
         }
 
-    }
+        [HttpPost]
+        public async Task<IActionResult> CreateTraining([FromBody] CreateTrainingRequest request)
+        {
+            var response = await Sender.Send(new CreateTrainingCommand(request.ScheduledAt, request.TrainingTypeId, request.TrainerId, request.MaxParticipants));
+            
+            if (response.IsFailure) 
+                return Ok(); // TODO: change with HandleFaluireMethod
+
+            return Ok();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateTraining(int id, [FromBody] UpdateTrainingRequest request)
+        {
+			var response = await Sender.Send(new UpdateTrainingCommand(id, request.ScheduledAt, request.MaxParticipants));
+
+			if (response.IsFailure)
+				return Ok(); // TODO: change with HandleFaluireMethod
+
+			return Ok();
+		}
+
+	}
 }

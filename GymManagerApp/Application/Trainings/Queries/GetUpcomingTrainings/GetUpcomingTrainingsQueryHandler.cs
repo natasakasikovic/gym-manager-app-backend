@@ -7,7 +7,7 @@ using MediatR;
 
 namespace GymManagerApp.Application.CQRS.Queries.GetTrainings
 {
-    public class GetTrainingsQueryHandler : IQueryHandler<GetTrainingsQuery, List<TrainingResponse>>
+    public class GetTrainingsQueryHandler : IQueryHandler<GetUpcomingTrainingsQuery, List<TrainingResponse>>
     {
 
         private readonly ITrainingRepository _repository;
@@ -17,13 +17,13 @@ namespace GymManagerApp.Application.CQRS.Queries.GetTrainings
             _repository = repository;
         }
 
-        public async Task<Result<List<TrainingResponse>>> Handle(GetTrainingsQuery request, CancellationToken cancellationToken)
+        public async Task<Result<List<TrainingResponse>>> Handle(GetUpcomingTrainingsQuery request, CancellationToken cancellationToken)
         {
             var trainings = await _repository.GetAll();
 
             trainings = trainings.Where(t => t.IsUpcoming()).ToList();
 
-            List<TrainingResponse> response = trainings.Select(t => new TrainingResponse(t.ScheduledAt, t.MaxParticipants)).ToList(); // TODO: use AutoMapper?
+            List<TrainingResponse> response = trainings.Select(t => new TrainingResponse(t.Id, t.ScheduledAt, t.MaxParticipants)).ToList(); // TODO: use AutoMapper?
 
 			return Result.Success(response);
 		}

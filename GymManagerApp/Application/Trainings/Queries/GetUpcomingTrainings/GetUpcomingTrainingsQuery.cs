@@ -5,5 +5,5 @@ using MediatR;
 
 namespace GymManagerApp.Application.CQRS.Queries.GetTrainings
 {
-    public sealed record GetTrainingsQuery() : IQuery<List<TrainingResponse>> { }
+    public sealed record GetUpcomingTrainingsQuery() : IQuery<List<TrainingResponse>> { }
 }

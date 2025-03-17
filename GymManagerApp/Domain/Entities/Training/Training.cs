@@ -18,6 +18,26 @@ namespace GymManagerApp.Domain.Entities.Training
 
         private Training() { }
 
+        private Training(TrainingType type, DateTime scheduledAt, Trainer trainer, int maxParticipants)
+		{
+			Type = type;
+			ScheduledAt = scheduledAt;
+			Trainer = trainer;
+			MaxParticipants = maxParticipants;
+			Participants = new();
+		}
+
+		public static Training Create (TrainingType type, DateTime scheduledAt, Trainer trainer, int maxParticipants)
+		{
+			return new Training(type, scheduledAt, trainer, maxParticipants);
+		}
+
+		public void Update(DateTime scheduledAt, int maxParticipants)
+		{
+			ScheduledAt = scheduledAt;
+			MaxParticipants = maxParticipants;
+		}
+
 		public bool IsUpcoming()
 		{
 			return ScheduledAt > DateTime.UtcNow;
