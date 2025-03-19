@@ -20,7 +20,7 @@ namespace GymManagerApp.Presentation.Controllers
 			var response = await Sender.Send(new GetTrainingTypesQuery());
 
 			if (response.IsFailure)
-				return Ok(response); // TODO: replace with HandleError method
+				return HandleFaluire(response);
 
 			return Ok(response.Value);
 		}
@@ -31,7 +31,7 @@ namespace GymManagerApp.Presentation.Controllers
 			var response = await Sender.Send(new UpdateTrainingTypeCommand(id, request.Name, request.Description, request.Intensity));
 
 			if (response.IsFailure)
-				return Ok(); // TODO: replace with HandleError method
+				return HandleFaluire(response);
 
 			return Ok(response.Value);
 		}
@@ -42,7 +42,7 @@ namespace GymManagerApp.Presentation.Controllers
 			var response = await Sender.Send(new CreateTrainingTypeCommand(request.Name, request.Description, request.Intensity));
 
 			if (response.IsFailure)
-				return Ok(); // TODO: replace with HandleError method
+				return HandleFaluire(response);
 
 			return Ok();
 		}
@@ -53,7 +53,7 @@ namespace GymManagerApp.Presentation.Controllers
 			var response = await Sender.Send(new DeleteTrainingTypeCommand(id));
 
 			if (response.IsFailure)
-				return Ok(); // TODO: replace with HandleError method
+				return HandleFaluire(response);
 
 			return Ok();
 		}
