@@ -21,7 +21,6 @@ namespace GymManagerApp.Presentation.Startup
 			services.AddScoped<ITrainerRepository, TrainerRepository>();
 			services.AddScoped<IAdminRepository, AdminRepository>();
 			services.AddScoped<IMemberRepository, MemberRepository>();
-			services.AddScoped<IMembershipRepository, MembershipRepository>();
 
 			return services;
 		}
