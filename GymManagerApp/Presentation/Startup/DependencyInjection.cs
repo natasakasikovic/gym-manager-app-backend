@@ -1,5 +1,7 @@
-﻿using GymManagerApp.Domain.RepositoryInterfaces;
+﻿using GymManagerApp.Application.Common.Behaviours;
+using GymManagerApp.Domain.RepositoryInterfaces;
 using GymManagerApp.Infrastructure.Database.Repositories;
+using MediatR;
 
 namespace GymManagerApp.Presentation.Startup
 {
@@ -10,6 +12,7 @@ namespace GymManagerApp.Presentation.Startup
 			services.AddRepositories();
 			services.AddAutoMapper(typeof(Program).Assembly);
 			services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+			services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
 
 			return services;
 		}
