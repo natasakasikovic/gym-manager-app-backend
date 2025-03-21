@@ -1,10 +1,10 @@
 ﻿using GymManagerApp.Application.Common;
-using GymManagerApp.Application.Common.CQRS;
-using GymManagerApp.Domain.RepositoryInterfaces;
+using GymManagerApp.Application.Common.Interfaces.CQRS;
+using GymManagerApp.Application.Common.Interfaces.RepositoryInterfaces;
 
 namespace GymManagerApp.Application.TrainingTypes.Commands.DeleteTrainingType
 {
-	public class DeleteTrainingTypeCommandHandler : ICommandHandler<DeleteTrainingTypeCommand>
+    public class DeleteTrainingTypeCommandHandler : ICommandHandler<DeleteTrainingTypeCommand>
 	{
 		private ITrainingTypeRepository _repository;
 

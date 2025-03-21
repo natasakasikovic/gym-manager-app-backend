@@ -1,4 +1,4 @@
-﻿using GymManagerApp.Domain.Entities.Common;
+﻿using GymManagerApp.Domain.Common;
 
 namespace GymManagerApp.Domain.RepositoryInterfaces
 {

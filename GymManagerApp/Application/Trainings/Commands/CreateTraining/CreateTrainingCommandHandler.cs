@@ -1,12 +1,12 @@
 ﻿using GymManagerApp.Application.Common;
-using GymManagerApp.Application.Common.CQRS;
-using GymManagerApp.Domain.Entities.Training;
+using GymManagerApp.Application.Common.Interfaces.CQRS;
+using GymManagerApp.Application.Common.Interfaces.RepositoryInterfaces;
+using GymManagerApp.Domain.Entities;
 using GymManagerApp.Domain.Entities.User;
-using GymManagerApp.Domain.RepositoryInterfaces;
 
 namespace GymManagerApp.Application.Trainings.Commands.CreateTraining
 {
-	public class CreateTrainingCommandHandler : ICommandHandler<CreateTrainingCommand>
+    public class CreateTrainingCommandHandler : ICommandHandler<CreateTrainingCommand>
 	{
 
 		private readonly ITrainingRepository _repository;

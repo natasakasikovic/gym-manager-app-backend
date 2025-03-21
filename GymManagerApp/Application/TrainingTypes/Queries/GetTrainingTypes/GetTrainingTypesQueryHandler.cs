@@ -1,11 +1,11 @@
 ﻿using GymManagerApp.Application.Common;
-using GymManagerApp.Application.Common.CQRS;
-using GymManagerApp.Domain.RepositoryInterfaces;
+using GymManagerApp.Application.Common.Interfaces.CQRS;
+using GymManagerApp.Application.Common.Interfaces.RepositoryInterfaces;
 using MediatR;
 
 namespace GymManagerApp.Application.TrainingTypes.Queries.GetTrainingTypes
 {
-	public class GetTrainingTypesQueryHandler : IQueryHandler<GetTrainingTypesQuery, List<TrainingTypeResponse>>
+    public class GetTrainingTypesQueryHandler : IQueryHandler<GetTrainingTypesQuery, List<TrainingTypeResponse>>
 	{
 
 		private readonly ITrainingTypeRepository _repository;

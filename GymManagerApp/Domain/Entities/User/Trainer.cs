@@ -1,6 +1,9 @@
-﻿namespace GymManagerApp.Domain.Entities.User
-{
+﻿using GymManagerApp.Domain.Entities;
 
-    public class Trainer : User { }
+namespace GymManagerApp.Domain.Entities.User
+{
+    public class Trainer : User {
+        List<TrainingType> specializations;
+    }
 
 }

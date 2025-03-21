@@ -1,4 +1,4 @@
-﻿using GymManagerApp.Domain.Entities.Training;
+﻿using GymManagerApp.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

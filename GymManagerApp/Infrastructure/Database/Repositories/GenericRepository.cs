@@ -1,10 +1,10 @@
-﻿using GymManagerApp.Domain.Entities.Common;
-using GymManagerApp.Domain.RepositoryInterfaces;
+﻿using GymManagerApp.Application.Common.Interfaces.RepositoryInterfaces;
+using GymManagerApp.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace GymManagerApp.Infrastructure.Database.Repositories
 {
-	public abstract class GenericRepository<T> :IRepository<T> where T : BaseEntity
+    public abstract class GenericRepository<T> :IRepository<T> where T : BaseEntity
     {
 
         private readonly DatabaseContext _dbContext;

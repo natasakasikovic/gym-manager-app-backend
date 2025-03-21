@@ -1,6 +1,6 @@
-﻿using GymManagerApp.Domain.Entities.User.Member;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using GymManagerApp.Domain.Entities.User;
 
 namespace GymManagerApp.Infrastructure.Database.Configurations.UserConfiguration
 {
@@ -12,7 +12,6 @@ namespace GymManagerApp.Infrastructure.Database.Configurations.UserConfiguration
             builder.HasKey(m => m.Id);
             builder.Property(m => m.Email).IsRequired();
             builder.Property(m => m.Password).IsRequired();
-            builder.HasMany(m => m.Membership).WithOne().HasForeignKey("Id");
         }
     }
 }

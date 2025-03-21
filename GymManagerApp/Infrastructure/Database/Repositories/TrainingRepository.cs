@@ -1,5 +1,5 @@
-﻿using GymManagerApp.Domain.Entities.Training;
-using GymManagerApp.Domain.RepositoryInterfaces;
+﻿using GymManagerApp.Application.Common.Interfaces.RepositoryInterfaces;
+using GymManagerApp.Domain.Entities;
 
 namespace GymManagerApp.Infrastructure.Database.Repositories
 {

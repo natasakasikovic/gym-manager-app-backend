@@ -1,11 +1,11 @@
 ﻿using GymManagerApp.Application.Common;
-using GymManagerApp.Domain.Entities.Training;
-using GymManagerApp.Domain.RepositoryInterfaces;
+using GymManagerApp.Application.Common.Interfaces.RepositoryInterfaces;
+using GymManagerApp.Domain.Entities;
 using MediatR;
 
 namespace GymManagerApp.Application.Trainings.Commands.UpdateTraining
 {
-	public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingCommand, Result>
+    public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingCommand, Result>
 	{
 		private readonly ITrainingRepository _repository;
 

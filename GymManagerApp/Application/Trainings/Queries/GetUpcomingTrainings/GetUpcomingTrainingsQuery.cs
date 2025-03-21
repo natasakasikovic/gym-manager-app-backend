@@ -1,5 +1,5 @@
 ﻿using GymManagerApp.Application.Common;
-using GymManagerApp.Application.Common.CQRS;
+using GymManagerApp.Application.Common.Interfaces.CQRS;
 using GymManagerApp.Application.Trainings.Queries.GetTrainings;
 using MediatR;
 

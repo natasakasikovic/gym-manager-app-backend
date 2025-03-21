@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GymManagerApp.Domain.Entities.Common
+namespace GymManagerApp.Domain.Common
 {
     public abstract class BaseEntity
     {

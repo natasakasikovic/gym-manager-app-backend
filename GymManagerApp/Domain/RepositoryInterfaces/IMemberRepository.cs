@@ -1,5 +1,4 @@
-﻿using GymManagerApp.Domain.Entities.Training;
-using GymManagerApp.Domain.Entities.User.Member;
+﻿using GymManagerApp.Domain.Entities.User;
 
 namespace GymManagerApp.Domain.RepositoryInterfaces
 {

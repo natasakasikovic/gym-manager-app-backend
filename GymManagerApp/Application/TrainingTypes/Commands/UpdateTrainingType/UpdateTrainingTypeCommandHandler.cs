@@ -1,13 +1,13 @@
 ﻿using GymManagerApp.Application.Common;
-using GymManagerApp.Application.Common.CQRS;
-using GymManagerApp.Domain.Entities.Training;
-using GymManagerApp.Domain.RepositoryInterfaces;
+using GymManagerApp.Application.Common.Interfaces.CQRS;
+using GymManagerApp.Application.Common.Interfaces.RepositoryInterfaces;
+using GymManagerApp.Domain.Entities;
 using MediatR;
 using System.Reflection.Metadata.Ecma335;
 
 namespace GymManagerApp.Application.TrainingTypes.Commands.UpdateTrainingType
 {
-	public class UpdateTrainingTypeCommandHandler : ICommandHandler<UpdateTrainingTypeCommand, int>
+    public class UpdateTrainingTypeCommandHandler : ICommandHandler<UpdateTrainingTypeCommand, int>
 	{
 
 		private readonly ITrainingTypeRepository _repository;
