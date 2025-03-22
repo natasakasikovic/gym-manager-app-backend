@@ -4,7 +4,7 @@ namespace GymManagerApp.Application.Common.Behaviours;
 
 public class LoggingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
 {
-
+	
 	private readonly ILogger<LoggingBehaviour<TRequest, TResponse>> _logger;
 
     public LoggingBehaviour(ILogger<LoggingBehaviour<TRequest, TResponse>> logger)
