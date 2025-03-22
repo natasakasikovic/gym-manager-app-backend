@@ -6,56 +6,56 @@ using GymManagerApp.Presentation.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GymManagerApp.Presentation.Controllers
+namespace GymManagerApp.Presentation.Controllers;
+
+
+[Route("/api/training-types")]
+
+public class TrainingTypeController : BaseApiController
 {
-	[Route("/api/training-types")]
+	public TrainingTypeController(ISender sender) : base(sender) { }
 
-	public class TrainingTypeController : BaseApiController
+	[HttpGet]
+	public async Task<IActionResult> GetTrainingTypes()
 	{
-		public TrainingTypeController(ISender sender) : base(sender) { }
+		var response = await Sender.Send(new GetTrainingTypesQuery());
 
-		[HttpGet]
-		public async Task<IActionResult> GetTrainingTypes()
-		{
-			var response = await Sender.Send(new GetTrainingTypesQuery());
+		if (response.IsFailure)
+			return HandleFaluire(response);
 
-			if (response.IsFailure)
-				return HandleFaluire(response);
+		return Ok(response.Value);
+	}
 
-			return Ok(response.Value);
-		}
+	[HttpPut("{id}")]
+	public async Task<IActionResult> UpdateTrainingType(int id, [FromBody] UpdateTrainingTypeRequest request)
+	{
+		var response = await Sender.Send(new UpdateTrainingTypeCommand(id, request.Name, request.Description, request.Intensity));
 
-		[HttpPut("{id}")]
-		public async Task<IActionResult> UpdateTrainingType(int id, [FromBody] UpdateTrainingTypeRequest request)
-		{
-			var response = await Sender.Send(new UpdateTrainingTypeCommand(id, request.Name, request.Description, request.Intensity));
+		if (response.IsFailure)
+			return HandleFaluire(response);
 
-			if (response.IsFailure)
-				return HandleFaluire(response);
+		return Ok();
+	}
 
-			return Ok();
-		}
+	[HttpPost]
+	public async Task<IActionResult> CreateTrainingType([FromBody] CreateTrainingTypeRequest request)
+	{
+		var response = await Sender.Send(new CreateTrainingTypeCommand(request.Name, request.Description, request.Intensity));
 
-		[HttpPost]
-		public async Task<IActionResult> CreateTrainingType([FromBody] CreateTrainingTypeRequest request)
-		{
-			var response = await Sender.Send(new CreateTrainingTypeCommand(request.Name, request.Description, request.Intensity));
+		if (response.IsFailure)
+			return HandleFaluire(response);
 
-			if (response.IsFailure)
-				return HandleFaluire(response);
+		return Ok();
+	}
 
-			return Ok();
-		}
+	[HttpDelete("{id}")]
+	public async Task<IActionResult> DeleteTrainingType(int id)
+	{
+		var response = await Sender.Send(new DeleteTrainingTypeCommand(id));
 
-		[HttpDelete("{id}")]
-		public async Task<IActionResult> DeleteTrainingType(int id)
-		{
-			var response = await Sender.Send(new DeleteTrainingTypeCommand(id));
+		if (response.IsFailure)
+			return HandleFaluire(response);
 
-			if (response.IsFailure)
-				return HandleFaluire(response);
-
-			return Ok();
-		}
+		return Ok();
 	}
 }

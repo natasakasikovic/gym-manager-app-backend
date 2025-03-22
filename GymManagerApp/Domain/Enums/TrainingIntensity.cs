@@ -1,10 +1,9 @@
-﻿namespace GymManagerApp.Domain.Enums
+﻿namespace GymManagerApp.Domain.Enums;
+
+public enum TrainingIntensity
 {
-    public enum TrainingIntensity
-    {
-        Low,
-        Moderate,
-        High,
-        Extreme
-    }
+    Low,
+    Moderate,
+    High,
+    Extreme
 }

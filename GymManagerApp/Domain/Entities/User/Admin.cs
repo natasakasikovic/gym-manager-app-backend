@@ -1,4 +1,3 @@
-﻿namespace GymManagerApp.Domain.Entities.User
-{
-    public class Admin : User { }
-}
+﻿namespace GymManagerApp.Domain.Entities.User;
+
+public class Admin : User { }

@@ -4,31 +4,30 @@ using GymManagerApp.Domain.Entities;
 using GymManagerApp.Domain.Enums;
 using GymManagerApp.Domain.RepositoryInterfaces;
 
-namespace GymManagerApp.Application.TrainingTypes.Commands.UpdateTrainingType
+namespace GymManagerApp.Application.TrainingTypes.Commands.UpdateTrainingType;
+
+public sealed record UpdateTrainingTypeCommand(int Id, string Name, string Description, TrainingIntensity Intensity) : ICommand { }
+
+public class UpdateTrainingTypeCommandHandler : ICommandHandler<UpdateTrainingTypeCommand>
 {
-    public sealed record UpdateTrainingTypeCommand(int Id, string Name, string Description, TrainingIntensity Intensity) : ICommand { }
 
-	public class UpdateTrainingTypeCommandHandler : ICommandHandler<UpdateTrainingTypeCommand>
+	private readonly ITrainingTypeRepository _repository;
+
+	public UpdateTrainingTypeCommandHandler(ITrainingTypeRepository repository)
 	{
+		_repository = repository;
+	}
 
-		private readonly ITrainingTypeRepository _repository;
+	public async Task<Result> Handle(UpdateTrainingTypeCommand request, CancellationToken cancellationToken)
+	{
+		TrainingType type = await _repository.Get(request.Id);
 
-		public UpdateTrainingTypeCommandHandler(ITrainingTypeRepository repository)
-		{
-			_repository = repository;
-		}
+		if (type is null)
+			return Result.Failure(Error.NullValue);
 
-		public async Task<Result> Handle(UpdateTrainingTypeCommand request, CancellationToken cancellationToken)
-		{
-			TrainingType type = await _repository.Get(request.Id);
+		type.Update(request.Name, request.Description, request.Intensity);
+		await _repository.Update(type);
 
-			if (type is null)
-				return Result.Failure(Error.NullValue);
-
-			type.Update(request.Name, request.Description, request.Intensity);
-			await _repository.Update(type);
-
-			return Result.Success();
-		}
+		return Result.Success();
 	}
 }

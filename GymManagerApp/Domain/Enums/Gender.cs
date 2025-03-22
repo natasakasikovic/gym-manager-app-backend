@@ -1,8 +1,7 @@
-﻿namespace GymManagerApp.Domain.Enums
+﻿namespace GymManagerApp.Domain.Enums;
+
+public enum Gender
 {
-    public enum Gender
-    {
-        Male,
-        Female
-    }
+    Male,
+    Female
 }

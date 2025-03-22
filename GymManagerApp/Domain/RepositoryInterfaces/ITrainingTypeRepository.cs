@@ -1,6 +1,5 @@
 ﻿using GymManagerApp.Domain.Entities;
 
-namespace GymManagerApp.Domain.RepositoryInterfaces
-{
-    public interface ITrainingTypeRepository : IRepository<TrainingType> { }
-}
+namespace GymManagerApp.Domain.RepositoryInterfaces;
+
+public interface ITrainingTypeRepository : IRepository<TrainingType> { }

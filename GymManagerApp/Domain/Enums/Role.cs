@@ -1,9 +1,8 @@
-﻿namespace GymManagerApp.Domain.Enums
+﻿namespace GymManagerApp.Domain.Enums;
+
+public enum Role
 {
-    public enum Role
-    {
-        Member,
-        Administrator,
-        Trainer
-    }
+    Member,
+    Administrator,
+    Trainer
 }

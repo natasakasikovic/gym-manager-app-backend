@@ -1,7 +1,6 @@
-﻿namespace GymManagerApp.Application.Common.Enums
+﻿namespace GymManagerApp.Application.Common.Enums;
+
+public enum ErrorType
 {
-    public enum ErrorType
-    {
-        BadRequest,
-    }
+    BadRequest,
 }
