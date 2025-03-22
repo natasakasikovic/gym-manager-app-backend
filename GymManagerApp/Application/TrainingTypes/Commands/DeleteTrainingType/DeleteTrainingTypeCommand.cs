@@ -20,7 +20,7 @@ namespace GymManagerApp.Application.TrainingTypes.Commands.DeleteTrainingType
 			bool isSuccess = await _repository.Delete(request.Id);
 
 			if (!isSuccess)
-				return Result.Failure<Error>(Error.NullValue);
+				return Result.Failure(Error.NullValue);
 
 			return Result.Success();
 		}

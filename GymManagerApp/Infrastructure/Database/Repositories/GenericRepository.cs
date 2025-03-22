@@ -48,6 +48,9 @@ namespace GymManagerApp.Infrastructure.Database.Repositories
         {
             return await _dbContext.Set<T>().ToListAsync();
         }
-
-    }
+		public IQueryable<T> GetAllQueryable()
+		{
+			return _dbContext.Set<T>().AsQueryable();
+		}
+	}
 }

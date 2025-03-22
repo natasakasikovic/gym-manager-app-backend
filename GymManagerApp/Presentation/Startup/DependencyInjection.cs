@@ -1,7 +1,9 @@
-﻿using GymManagerApp.Application.Common.Behaviours;
+﻿using FluentValidation;
+using GymManagerApp.Application.Common.Behaviours;
 using GymManagerApp.Domain.RepositoryInterfaces;
 using GymManagerApp.Infrastructure.Database.Repositories;
 using MediatR;
+using System.Reflection;
 
 namespace GymManagerApp.Presentation.Startup
 {
@@ -13,6 +15,8 @@ namespace GymManagerApp.Presentation.Startup
 			services.AddAutoMapper(typeof(Program).Assembly);
 			services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 			services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
+			services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+			services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
 			return services;
 		}

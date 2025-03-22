@@ -33,7 +33,7 @@ namespace GymManagerApp.Presentation.Controllers
 			if (response.IsFailure)
 				return HandleFaluire(response);
 
-			return Ok(response.Value);
+			return Ok();
 		}
 
 		[HttpPost]

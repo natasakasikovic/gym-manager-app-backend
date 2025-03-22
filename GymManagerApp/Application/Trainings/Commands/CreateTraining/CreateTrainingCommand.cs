@@ -29,7 +29,7 @@ namespace GymManagerApp.Application.Trainings.Commands.CreateTraining
 			Trainer trainer = await _trainerRepository.Get(request.TrainerId);
 
 			if (type == null || trainer == null)
-				return Result.Faluire(Error.NullValue);
+				return Result.Failure(Error.NullValue);
 
 			Training training = Training.Create(type, request.ScheduledAt, trainer, request.MaxParticipants);
 			await _repository.Add(training);

@@ -14,11 +14,11 @@ namespace GymManagerApp.Application.Common.Behaviours
 
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
 		{
-			_logger.LogInformation($"Processing request of type {typeof(TRequest)}");
+			_logger.LogInformation($"Processing request of type {typeof(TRequest).Name}");
 
 			var response = await next();
 
-			_logger.LogInformation($"Completed handling request, response type: {typeof(TResponse)}");
+			_logger.LogInformation($"Completed handling request, response type: {typeof(TResponse).Name}");
 
 			return response;
 		}

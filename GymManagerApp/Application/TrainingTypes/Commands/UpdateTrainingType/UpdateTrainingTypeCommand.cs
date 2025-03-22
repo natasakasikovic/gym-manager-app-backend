@@ -6,9 +6,9 @@ using GymManagerApp.Domain.RepositoryInterfaces;
 
 namespace GymManagerApp.Application.TrainingTypes.Commands.UpdateTrainingType
 {
-    public sealed record UpdateTrainingTypeCommand(int Id, string Name, string Description, TrainingIntensity Intensity) : ICommand<int> { }
+    public sealed record UpdateTrainingTypeCommand(int Id, string Name, string Description, TrainingIntensity Intensity) : ICommand { }
 
-	public class UpdateTrainingTypeCommandHandler : ICommandHandler<UpdateTrainingTypeCommand, int>
+	public class UpdateTrainingTypeCommandHandler : ICommandHandler<UpdateTrainingTypeCommand>
 	{
 
 		private readonly ITrainingTypeRepository _repository;
@@ -18,17 +18,17 @@ namespace GymManagerApp.Application.TrainingTypes.Commands.UpdateTrainingType
 			_repository = repository;
 		}
 
-		public async Task<Result<int>> Handle(UpdateTrainingTypeCommand request, CancellationToken cancellationToken)
+		public async Task<Result> Handle(UpdateTrainingTypeCommand request, CancellationToken cancellationToken)
 		{
 			TrainingType type = await _repository.Get(request.Id);
 
 			if (type is null)
-				return Result.Failure<int>(Error.NullValue);
+				return Result.Failure(Error.NullValue);
 
 			type.Update(request.Name, request.Description, request.Intensity);
 			await _repository.Update(type);
 
-			return Result.Success(type.Id);
+			return Result.Success();
 		}
 	}
 }
