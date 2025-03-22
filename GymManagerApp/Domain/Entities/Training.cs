@@ -37,8 +37,8 @@ public class Training : BaseEntity
         MaxParticipants = maxParticipants;
     }
 
-    public bool IsUpcoming()
+    public bool IsUpcoming(DateTime currentTime)
     {
-        return ScheduledAt > DateTime.UtcNow;
+        return ScheduledAt > currentTime;
     }
 }

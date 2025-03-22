@@ -1,4 +1,5 @@
 ﻿using GymManagerApp.Application.Common;
+using GymManagerApp.Application.Common.Interfaces;
 using GymManagerApp.Application.Common.Interfaces.CQRS;
 using GymManagerApp.Application.Trainings.Queries.GetTrainings;
 using GymManagerApp.Domain.RepositoryInterfaces;
@@ -11,17 +12,19 @@ public class GetTrainingsQueryHandler : IQueryHandler<GetUpcomingTrainingsQuery,
 {
 
 	private readonly ITrainingRepository _repository;
+	private readonly IDateTime _dateTime;
 
-	public GetTrainingsQueryHandler(ITrainingRepository repository)
+	public GetTrainingsQueryHandler(ITrainingRepository repository, IDateTime dateTime)
 	{
 		_repository = repository;
+		_dateTime = dateTime;
 	}
 
 	public async Task<Result<List<TrainingResponse>>> Handle(GetUpcomingTrainingsQuery request, CancellationToken cancellationToken)
 	{
 		var trainings = await _repository.GetAll();
 
-		trainings = trainings.Where(t => t.IsUpcoming()).ToList();
+		trainings = trainings.Where(t => t.IsUpcoming(_dateTime.Now)).ToList();
 
 		List<TrainingResponse> response = trainings.Select(t => new TrainingResponse(t.Id, t.ScheduledAt, t.MaxParticipants)).ToList(); // TODO: use AutoMapper?
 
