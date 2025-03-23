@@ -1,5 +1,4 @@
 ﻿using GymManagerApp.Domain.Entities;
-using GymManagerApp.Domain.Entities.User;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -11,9 +10,7 @@ public class DatabaseContext : DbContext
 
     public DbSet<TrainingType> TrainingTypes { get; set; }
     public DbSet<Training> Trainings { get; set; }
-    public DbSet<Admin> Admins { get; set; }
-    public DbSet<Member> Members { get; set; }
-    public DbSet<Trainer> Trainers { get; set; }
+    public DbSet<User> Users{ get; set; }
         
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

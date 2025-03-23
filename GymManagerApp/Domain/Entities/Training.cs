@@ -1,5 +1,4 @@
 ﻿using GymManagerApp.Domain.Common;
-using GymManagerApp.Domain.Entities.User;
 
 namespace GymManagerApp.Domain.Entities;
 
@@ -9,7 +8,7 @@ public class Training : BaseEntity
 
     public DateTime ScheduledAt { get; private set; }
 
-    public Trainer Trainer { get; private set; }
+    public User Trainer { get; private set; }
 
     public int MaxParticipants { get; private set; }
 
@@ -17,7 +16,7 @@ public class Training : BaseEntity
 
     private Training() { }
 
-    private Training(TrainingType type, DateTime scheduledAt, Trainer trainer, int maxParticipants)
+    private Training(TrainingType type, DateTime scheduledAt, User trainer, int maxParticipants)
     {
         Type = type;
         ScheduledAt = scheduledAt;
@@ -26,7 +25,7 @@ public class Training : BaseEntity
         Participants = new();
     }
 
-    public static Training Create(TrainingType type, DateTime scheduledAt, Trainer trainer, int maxParticipants)
+    public static Training Create(TrainingType type, DateTime scheduledAt, User trainer, int maxParticipants)
     {
         return new Training(type, scheduledAt, trainer, maxParticipants);
     }
