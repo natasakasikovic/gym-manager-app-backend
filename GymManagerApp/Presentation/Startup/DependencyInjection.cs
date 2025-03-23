@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
 using GymManagerApp.Application.Common.Behaviours;
+using GymManagerApp.Application.Common.Interfaces;
 using GymManagerApp.Domain.RepositoryInterfaces;
+using GymManagerApp.Infrastructure;
 using GymManagerApp.Infrastructure.Database.Repositories;
 using MediatR;
 using System.Reflection;
@@ -17,6 +19,7 @@ public static class DependencyInjection
 		services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
 		services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 		services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+		services.AddSingleton<IDateTime, DateTimeProvider>();
 
 		return services;
 	}
