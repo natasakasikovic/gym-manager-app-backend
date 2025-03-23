@@ -22,15 +22,32 @@ public abstract class BaseApiController : ControllerBase
             { IsSuccess: true } => throw new InvalidOperationException(),
 
             { Error: { ErrorType: ErrorType.BadRequest } } =>
-            BadRequest(
-                new ProblemDetails
-                {
-                    Title = "Bad request",
-                    Type = result.Error.Code,
-                    Detail = result.Error.Description,
-                    Status = StatusCodes.Status400BadRequest
-                })
+            BadRequest(new ProblemDetails
+            {
+                Title = "Bad request",
+                Type = result.Error.Code,
+                Detail = result.Error.Description,
+                Status = StatusCodes.Status400BadRequest
+            }),
 
-            // TODO: handle more errors
-        };
+            { Error: { ErrorType: ErrorType.Unauthorized } } =>
+            StatusCode(StatusCodes.Status401Unauthorized,new ProblemDetails
+            {
+                Title = "Unauthorized",
+                Type = result.Error.Code,
+                Detail = result.Error.Description,
+                Status = StatusCodes.Status401Unauthorized
+            }),
+
+			{ Error: { ErrorType: ErrorType.Forbidden } } =>
+			StatusCode(StatusCodes.Status403Forbidden, new ProblemDetails
+			{
+				Title = "Forbidden",
+				Type = result.Error.Code,
+				Detail = result.Error.Description,
+				Status = StatusCodes.Status403Forbidden
+			}),
+
+			_ => throw new ArgumentException("Unknown error type")
+		};
 }
