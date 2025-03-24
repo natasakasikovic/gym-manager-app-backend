@@ -4,8 +4,8 @@ using GymManagerApp.Domain.Enums;
 namespace GymManagerApp.Domain.Entities;
 public class Person : BaseEntity
 {
-    public string Name { get; set; }
-    public string LastName { get; set; }
-    public Gender Gender { get; set; }
-    public string PhoneNumber { get; set; }
+    public string Name { get; protected set; }
+    public string LastName { get; protected set; }
+    public Gender Gender { get; protected set; }
+    public string PhoneNumber { get; protected set; }
 }

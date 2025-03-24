@@ -34,14 +34,14 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 			   .HasMaxLength(20);
 
 		builder.Property(u => u.Role)
-			   .IsRequired();
+			.HasConversion<string>()
+			.IsRequired();
 
 		builder.Property(u => u.Gender)
 			   .IsRequired();
 
-		builder.HasDiscriminator<Role>("Role")
-			   .HasValue<User>(Role.Administrator)
-			   .HasValue<User>(Role.Trainer)
-			   .HasValue<Member>(Role.Member);
+		builder.HasDiscriminator<string>("Discriminator").
+			HasValue<User>("User").
+			HasValue<Member>("Member");
 	}
 }

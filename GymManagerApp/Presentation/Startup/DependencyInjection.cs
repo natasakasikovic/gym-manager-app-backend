@@ -3,7 +3,9 @@ using GymManagerApp.Application.Common.Behaviours;
 using GymManagerApp.Application.Common.Interfaces;
 using GymManagerApp.Domain.RepositoryInterfaces;
 using GymManagerApp.Infrastructure;
+using GymManagerApp.Infrastructure.Common;
 using GymManagerApp.Infrastructure.Database.Repositories;
+using GymManagerApp.Infrastructure.Identity;
 using MediatR;
 using System.Reflection;
 
@@ -20,6 +22,11 @@ public static class DependencyInjection
 		services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 		services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 		services.AddSingleton<IDateTime, DateTimeProvider>();
+		services.AddTransient<IJwtProvider, JwtProvider>();
+		services.AddTransient<ICryptographyProvider, CryptographyProvider>();
+
+		services.ConfigureOptions<JwtOptionsSetup>();
+		services.ConfigureOptions<JwtBearerOptionsSetup>();
 
 		return services;
 	}

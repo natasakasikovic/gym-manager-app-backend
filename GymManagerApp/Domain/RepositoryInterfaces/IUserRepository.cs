@@ -2,4 +2,6 @@
 
 namespace GymManagerApp.Domain.RepositoryInterfaces;
 
-public interface IUserRepository : IRepository<User> { }
+public interface IUserRepository : IRepository<User> { 
+	Task<User> GetByEmail(string email);
+}
