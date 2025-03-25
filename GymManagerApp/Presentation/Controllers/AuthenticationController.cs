@@ -11,7 +11,7 @@ public class AuthenticationController : BaseApiController
 {
     public AuthenticationController(ISender sender) : base(sender) { }
 
-    [HttpPost("/login")]
+    [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginRequest request)
     {
         var response = await Sender.Send(new LoginUserCommand(request.Email, request.Password));
