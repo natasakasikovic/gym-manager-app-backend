@@ -33,7 +33,7 @@ public class LoginUserCommandHandler : ICommandHandler<LoginUserCommand, LoginRe
 
         string token = _jwtProvider.Generate(user);
 
-        var response = new LoginResponse(request.Email, token);
+        var response = new LoginResponse(user.Role, token);
 
         return Result.Success(response);
     }

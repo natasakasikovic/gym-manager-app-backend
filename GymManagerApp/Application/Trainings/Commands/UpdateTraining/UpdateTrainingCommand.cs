@@ -1,14 +1,14 @@
 ﻿using GymManagerApp.Application.Common;
+using GymManagerApp.Application.Common.Interfaces.CQRS;
 using GymManagerApp.Domain.Entities;
 using GymManagerApp.Domain.RepositoryInterfaces;
-using MediatR;
 
 namespace GymManagerApp.Application.Trainings.Commands.UpdateTraining;
 
 // TODO: consider adding more attributes
-public sealed record UpdateTrainingCommand(int Id, DateTime ScheduledAt, int MaxParticipants) : IRequest<Result>;
+public sealed record UpdateTrainingCommand(int Id, DateTime ScheduledAt, int MaxParticipants) : ICommand;
 
-public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingCommand, Result>
+public class UpdateTrainingCommandHandler : ICommandHandler<UpdateTrainingCommand>
 {
 	private readonly ITrainingRepository _repository;
 

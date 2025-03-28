@@ -1,3 +1,5 @@
-﻿namespace GymManagerApp.Application.Users.Commands.LoginUserCommand;
+﻿using GymManagerApp.Domain.Enums;
 
-public sealed record LoginResponse(string Email, string Jwt) { }
+namespace GymManagerApp.Application.Users.Commands.LoginUserCommand;
+
+public sealed record LoginResponse(Role Role, string Jwt) { }
