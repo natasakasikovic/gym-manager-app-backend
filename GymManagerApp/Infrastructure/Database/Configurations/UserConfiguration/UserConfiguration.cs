@@ -1,5 +1,4 @@
 ﻿using GymManagerApp.Domain.Entities;
-using GymManagerApp.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -34,11 +33,12 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 			   .HasMaxLength(20);
 
 		builder.Property(u => u.Role)
-			.HasConversion<string>()
+			.HasConversion<int>()
 			.IsRequired();
 
 		builder.Property(u => u.Gender)
-			   .IsRequired();
+			.HasConversion<int>()
+			.IsRequired();
 
 		builder.HasDiscriminator<string>("Discriminator").
 			HasValue<User>("User").

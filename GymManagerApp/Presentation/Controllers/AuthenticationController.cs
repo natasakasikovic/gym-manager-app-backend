@@ -22,4 +22,14 @@ public class AuthenticationController : BaseApiController
 		return Ok(response.Value);
 	}
 
+	[HttpPost("registration")]
+	public async Task<IActionResult> Register([FromBody] RegistrationRequest request)
+	{
+		var response = await Sender.Send(new RegisterUserCommand(request.Name, request.LastName, request.Gender, request.PhoneNumber, request.Email, request.Password, request.Role));
+
+		if (response.IsFailure)
+			return HandleFaluire(response);
+
+		return Ok(response.Value);
+	}
 }
