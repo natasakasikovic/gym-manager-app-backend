@@ -7,7 +7,7 @@ namespace GymManagerApp.Infrastructure.Database.Repositories;
 public abstract class GenericRepository<T> :IRepository<T> where T : BaseEntity
 {
 
-    private readonly DatabaseContext _dbContext;
+    protected readonly DatabaseContext _dbContext;
 
     public GenericRepository(DatabaseContext dbContext)
     {

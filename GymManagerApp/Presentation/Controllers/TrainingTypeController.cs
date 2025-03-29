@@ -1,6 +1,7 @@
 ﻿using GymManagerApp.Application.TrainingTypes.Commands.CreateTrainingType;
 using GymManagerApp.Application.TrainingTypes.Commands.DeleteTrainingType;
 using GymManagerApp.Application.TrainingTypes.Commands.UpdateTrainingType;
+using GymManagerApp.Application.TrainingTypes.Queries.GetTrainingType;
 using GymManagerApp.Application.TrainingTypes.Queries.GetTrainingTypes;
 using GymManagerApp.Presentation.Contracts;
 using MediatR;
@@ -19,6 +20,17 @@ public class TrainingTypeController : BaseApiController
 	public async Task<IActionResult> GetTrainingTypes()
 	{
 		var response = await Sender.Send(new GetTrainingTypesQuery());
+
+		if (response.IsFailure)
+			return HandleFaluire(response);
+
+		return Ok(response.Value);
+	}
+
+	[HttpGet("{id}")]
+	public async Task<IActionResult> GetTrainingType(int id)
+	{
+		var response = await Sender.Send(new GetTrainingTypeQuery(id));
 
 		if (response.IsFailure)
 			return HandleFaluire(response);

@@ -26,7 +26,7 @@ public class GetTrainingsQueryHandler : IQueryHandler<GetUpcomingTrainingsQuery,
 
 		trainings = trainings.Where(t => t.IsUpcoming(_dateTime.Now)).ToList();
 
-		List<TrainingResponse> response = trainings.Select(t => new TrainingResponse(t.Id, t.ScheduledAt, t.MaxParticipants)).ToList(); // TODO: use AutoMapper?
+		List<TrainingResponse> response = trainings.Select(t => new TrainingResponse(t.Id, t.Type.Name, t.ScheduledAt, t.MaxParticipants)).ToList(); // TODO: use AutoMapper?
 
 		return Result.Success(response);
 	}

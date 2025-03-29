@@ -1,6 +1,7 @@
 ﻿using GymManagerApp.Application.CQRS.Queries.GetTrainings;
 using GymManagerApp.Application.Trainings.Commands.CreateTraining;
 using GymManagerApp.Application.Trainings.Commands.UpdateTraining;
+using GymManagerApp.Application.Trainings.Queries.GetTraining;
 using GymManagerApp.Presentation.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,18 @@ public class TrainingController : BaseApiController
         return Ok(response.Value);
     }
 
-    [HttpPost]
+	[HttpGet("{id}")]
+	public async Task<IActionResult> GetTraining(int id)
+	{
+		var response = await Sender.Send(new GetTrainingQuery(id));
+
+		if (response.IsFailure)
+			return HandleFaluire(response);
+
+		return Ok(response.Value);
+	}
+
+	[HttpPost]
     public async Task<IActionResult> CreateTraining([FromBody] CreateTrainingRequest request)
     {
         var response = await Sender.Send(new CreateTrainingCommand(request.ScheduledAt, request.TrainingTypeId, request.TrainerId, request.MaxParticipants));
