@@ -14,5 +14,6 @@ public class TrainingConfiguration : IEntityTypeConfiguration<Training>
         builder.HasOne(t => t.Trainer).WithMany().HasForeignKey("TrainerId");
 		builder.Property(t => t.ScheduledAt).IsRequired();
         builder.Property(t => t.MaxParticipants).IsRequired();
+		builder.HasMany(t => t.Participants).WithMany().UsingEntity(j => j.ToTable("TrainingParticipants"));
 	}
 }
