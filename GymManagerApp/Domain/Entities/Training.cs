@@ -12,7 +12,7 @@ public class Training : BaseEntity
 
     public int MaxParticipants { get; private set; }
 
-    public List<Member> Participants { get; private set; }
+    public List<Member> Participants { get; private set; } = new();
 
     private Training() { }
 
@@ -36,8 +36,23 @@ public class Training : BaseEntity
         MaxParticipants = maxParticipants;
     }
 
+    public void AddParticipant(Member member)
+    {
+        Participants.Add(member);
+    }
+
     public bool IsUpcoming(DateTime currentTime)
     {
         return ScheduledAt > currentTime;
     }
+
+	public bool IsFull()
+	{
+		return MaxParticipants == Participants.Count;
+	}
+
+    public bool IsAlreadyParticipant(Member member)
+    {
+		return Participants.Any(m => m.Id == member.Id);
+	}
 }

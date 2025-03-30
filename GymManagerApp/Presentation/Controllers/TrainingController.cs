@@ -1,4 +1,6 @@
-﻿using GymManagerApp.Application.CQRS.Queries.GetTrainings;
+﻿using Azure.Core;
+using GymManagerApp.Application.CQRS.Queries.GetTrainings;
+using GymManagerApp.Application.Trainings.Commands.AddParticipantToTraining;
 using GymManagerApp.Application.Trainings.Commands.CreateTraining;
 using GymManagerApp.Application.Trainings.Commands.UpdateTraining;
 using GymManagerApp.Application.Trainings.Queries.GetTraining;
@@ -59,4 +61,15 @@ public class TrainingController : BaseApiController
 		return Ok();
 	}
 
+
+	[HttpPost("{trainingId}/participants/participantId")]
+	public async Task<IActionResult> AddParticipantToTraining(int trainingId, int participantId) // TODO: remove participantId and take it from token!
+	{
+		var response = await Sender.Send(new AddParticipantToTrainingCommand(trainingId, participantId));
+
+		if (response.IsFailure)
+			return HandleFaluire(response);
+
+		return Ok();
+	}
 }
