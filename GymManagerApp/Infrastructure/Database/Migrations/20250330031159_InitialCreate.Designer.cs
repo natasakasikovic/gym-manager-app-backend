@@ -12,14 +12,15 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GymManagerApp.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20250323153202_InitialCreate")]
+    [Migration("20250330031159_InitialCreate")]
     partial class InitialCreate
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.0")
+                .HasAnnotation("ProductVersion", "7.0.20")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -87,6 +88,10 @@ namespace GymManagerApp.Infrastructure.Database.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -124,7 +129,24 @@ namespace GymManagerApp.Infrastructure.Database.Migrations
 
                     b.ToTable("Users", (string)null);
 
-                    b.HasDiscriminator<int>("Role").HasValue(2);
+                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("MemberTraining", b =>
+                {
+                    b.Property<int>("ParticipantsId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TrainingId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ParticipantsId", "TrainingId");
+
+                    b.HasIndex("TrainingId");
+
+                    b.ToTable("TrainingParticipants", (string)null);
                 });
 
             modelBuilder.Entity("GymManagerApp.Domain.Entities.Member", b =>
@@ -132,14 +154,9 @@ namespace GymManagerApp.Infrastructure.Database.Migrations
                     b.HasBaseType("GymManagerApp.Domain.Entities.User");
 
                     b.Property<DateTime>("MembershipExpiration")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
-                    b.Property<int?>("TrainingId")
-                        .HasColumnType("integer");
-
-                    b.HasIndex("TrainingId");
-
-                    b.HasDiscriminator().HasValue(0);
+                    b.HasDiscriminator().HasValue("Member");
                 });
 
             modelBuilder.Entity("GymManagerApp.Domain.Entities.Training", b =>
@@ -161,16 +178,19 @@ namespace GymManagerApp.Infrastructure.Database.Migrations
                     b.Navigation("Type");
                 });
 
-            modelBuilder.Entity("GymManagerApp.Domain.Entities.Member", b =>
+            modelBuilder.Entity("MemberTraining", b =>
                 {
-                    b.HasOne("GymManagerApp.Domain.Entities.Training", null)
-                        .WithMany("Participants")
-                        .HasForeignKey("TrainingId");
-                });
+                    b.HasOne("GymManagerApp.Domain.Entities.Member", null)
+                        .WithMany()
+                        .HasForeignKey("ParticipantsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("GymManagerApp.Domain.Entities.Training", b =>
-                {
-                    b.Navigation("Participants");
+                    b.HasOne("GymManagerApp.Domain.Entities.Training", null)
+                        .WithMany()
+                        .HasForeignKey("TrainingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
