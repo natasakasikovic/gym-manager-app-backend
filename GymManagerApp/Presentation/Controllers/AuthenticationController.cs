@@ -17,7 +17,7 @@ public class AuthenticationController : BaseApiController
         var response = await Sender.Send(new LoginUserCommand(request.Email, request.Password));
 
 		if (response.IsFailure)
-			return HandleFaluire(response);
+			return HandleFailure(response);
 
 		return Ok(response.Value);
 	}
@@ -28,7 +28,7 @@ public class AuthenticationController : BaseApiController
 		var response = await Sender.Send(new RegisterUserCommand(request.Name, request.LastName, request.Gender, request.PhoneNumber, request.Email, request.Password, request.Role));
 
 		if (response.IsFailure)
-			return HandleFaluire(response);
+			return HandleFailure(response);
 
 		return Ok(response.Value);
 	}

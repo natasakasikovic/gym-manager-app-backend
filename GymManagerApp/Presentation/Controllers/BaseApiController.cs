@@ -16,7 +16,7 @@ public abstract class BaseApiController : ControllerBase
         Sender = sender;
     }
 
-    protected IActionResult HandleFaluire(Result result) =>
+    protected IActionResult HandleFailure(Result result) =>
         result switch
         {
             { IsSuccess: true } => throw new InvalidOperationException(),

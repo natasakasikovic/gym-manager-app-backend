@@ -23,7 +23,7 @@ public class TrainingController : BaseApiController
         var response = await Sender.Send(new GetUpcomingTrainingsQuery());   
 
         if (response.IsFailure)
-            return HandleFaluire(response);
+            return HandleFailure(response);
 
         return Ok(response.Value);
     }
@@ -34,7 +34,7 @@ public class TrainingController : BaseApiController
 		var response = await Sender.Send(new GetTrainingQuery(id));
 
 		if (response.IsFailure)
-			return HandleFaluire(response);
+			return HandleFailure(response);
 
 		return Ok(response.Value);
 	}
@@ -45,7 +45,7 @@ public class TrainingController : BaseApiController
         var response = await Sender.Send(new CreateTrainingCommand(request.ScheduledAt, request.TrainingTypeId, request.TrainerId, request.MaxParticipants));
             
         if (response.IsFailure) 
-            return HandleFaluire(response); 
+            return HandleFailure(response); 
 
         return Ok();
     }
@@ -56,7 +56,7 @@ public class TrainingController : BaseApiController
 		var response = await Sender.Send(new UpdateTrainingCommand(id, request.ScheduledAt, request.MaxParticipants));
 
 		if (response.IsFailure)
-			return HandleFaluire(response);
+			return HandleFailure(response);
 
 		return Ok();
 	}
@@ -68,7 +68,7 @@ public class TrainingController : BaseApiController
 		var response = await Sender.Send(new AddParticipantToTrainingCommand(trainingId, participantId));
 
 		if (response.IsFailure)
-			return HandleFaluire(response);
+			return HandleFailure(response);
 
 		return Ok();
 	}

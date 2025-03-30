@@ -22,7 +22,7 @@ public class TrainingTypeController : BaseApiController
 		var response = await Sender.Send(new GetTrainingTypesQuery());
 
 		if (response.IsFailure)
-			return HandleFaluire(response);
+			return HandleFailure(response);
 
 		return Ok(response.Value);
 	}
@@ -33,7 +33,7 @@ public class TrainingTypeController : BaseApiController
 		var response = await Sender.Send(new GetTrainingTypeQuery(id));
 
 		if (response.IsFailure)
-			return HandleFaluire(response);
+			return HandleFailure(response);
 
 		return Ok(response.Value);
 	}
@@ -44,7 +44,7 @@ public class TrainingTypeController : BaseApiController
 		var response = await Sender.Send(new UpdateTrainingTypeCommand(id, request.Name, request.Description, request.Intensity));
 
 		if (response.IsFailure)
-			return HandleFaluire(response);
+			return HandleFailure(response);
 
 		return Ok();
 	}
@@ -55,7 +55,7 @@ public class TrainingTypeController : BaseApiController
 		var response = await Sender.Send(new CreateTrainingTypeCommand(request.Name, request.Description, request.Intensity));
 
 		if (response.IsFailure)
-			return HandleFaluire(response);
+			return HandleFailure(response);
 
 		return Ok();
 	}
@@ -66,7 +66,7 @@ public class TrainingTypeController : BaseApiController
 		var response = await Sender.Send(new DeleteTrainingTypeCommand(id));
 
 		if (response.IsFailure)
-			return HandleFaluire(response);
+			return HandleFailure(response);
 
 		return Ok();
 	}
