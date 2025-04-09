@@ -1,6 +1,6 @@
 ﻿using GymManagerApp.Application.Common.Interfaces;
 
-namespace GymManagerApp.Infrastructure.Common;
+namespace GymManagerApp.Infrastructure.Security.Password;
 
 public class CryptographyProvider : ICryptographyProvider
 {

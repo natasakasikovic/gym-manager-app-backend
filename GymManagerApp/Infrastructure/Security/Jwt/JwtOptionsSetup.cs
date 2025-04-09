@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 
-namespace GymManagerApp.Infrastructure.Identity;
+namespace GymManagerApp.Infrastructure.Security.Jwt;
 
 public class JwtOptionsSetup : IConfigureOptions<JwtOptions>
 {
