@@ -1,3 +1,3 @@
 ﻿namespace GymManagerApp.Presentation.Contracts;
 
-public sealed record CreateTrainingRequest(int TrainingTypeId, DateTime ScheduledAt, int TrainerId, int MaxParticipants) { }
+public sealed record CreateTrainingRequest(DateTime ScheduledAt, int TrainingTypeId, int MaxParticipants) { }

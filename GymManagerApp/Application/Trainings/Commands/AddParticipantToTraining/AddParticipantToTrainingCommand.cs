@@ -1,21 +1,24 @@
 ﻿using GymManagerApp.Application.Common;
 using GymManagerApp.Application.Common.Interfaces.CQRS;
+using GymManagerApp.Application.Common.Interfaces.Security;
 using GymManagerApp.Domain.Entities;
 using GymManagerApp.Domain.RepositoryInterfaces;
 
 namespace GymManagerApp.Application.Trainings.Commands.AddParticipantToTraining;
 
-public sealed record AddParticipantToTrainingCommand(int TrainingId, int ParticipantId) : ICommand; // TODO: get participant from token!
+public sealed record AddParticipantToTrainingCommand(int TrainingId) : ICommand;
 
 public class AddParticipantToTrainingCommandHandler : ICommandHandler<AddParticipantToTrainingCommand>
 {
 	private readonly ITrainingRepository _repository;
 	private readonly IUserRepository _userRepository;
+	private readonly ICurrentUserProvider _currentUserProvider;
 
-	public AddParticipantToTrainingCommandHandler(ITrainingRepository repository, IUserRepository userRepository)
+	public AddParticipantToTrainingCommandHandler(ITrainingRepository repository, IUserRepository userRepository, ICurrentUserProvider currentUserProvider)
 	{
 		_repository = repository;
 		_userRepository = userRepository;
+		_currentUserProvider = currentUserProvider;
 	}
 
 	public async Task<Result> Handle(AddParticipantToTrainingCommand request, CancellationToken cancellationToken)
@@ -28,8 +31,9 @@ public class AddParticipantToTrainingCommandHandler : ICommandHandler<AddPartici
 		if (training.IsFull())
 			return Result.Failure(new Error("Error.TrainingIsFull", "The training session is already full."));
 
-		var user = await _userRepository.Get(request.ParticipantId);
+		int participantId = _currentUserProvider.GetId();
 
+		var user = await _userRepository.Get(participantId);
 
 		if (user is not Member member)
 			return Result.Failure(new Error("Error.InvalidUser", "The user is not a member of the gym."));

@@ -1,7 +1,5 @@
 ﻿using GymManagerApp.Domain.Entities;
 using GymManagerApp.Domain.RepositoryInterfaces;
-using GymManagerApp.Infrastructure.Database.Repositories;
-using GymManagerApp.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace GymManagerApp.Infrastructure.Database.Repositories;
@@ -18,7 +16,7 @@ public class TrainingRepository : GenericRepository<Training>, ITrainingReposito
 			.FirstOrDefaultAsync(t => t.Id == id);
 	}
 
-	public async Task<List<Training>> GetAll()
+	public async Task<IEnumerable<Training>> GetAll()
 	{
 		return await _dbContext.Trainings.Include(t => t.Type)
 			.Include(t => t.Trainer)

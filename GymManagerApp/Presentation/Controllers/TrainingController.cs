@@ -38,11 +38,12 @@ public class TrainingController : BaseApiController
 
 		return Ok(response.Value);
 	}
-
+	
 	[HttpPost]
     public async Task<IActionResult> CreateTraining([FromBody] CreateTrainingRequest request)
     {
-        var response = await Sender.Send(new CreateTrainingCommand(request.ScheduledAt, request.TrainingTypeId, request.TrainerId, request.MaxParticipants));
+
+		var response = await Sender.Send(new CreateTrainingCommand(request.ScheduledAt, request.TrainingTypeId, request.MaxParticipants));
             
         if (response.IsFailure) 
             return HandleFailure(response); 
@@ -62,10 +63,10 @@ public class TrainingController : BaseApiController
 	}
 
 
-	[HttpPost("{trainingId}/participants/participantId")]
-	public async Task<IActionResult> AddParticipantToTraining(int trainingId, int participantId) // TODO: remove participantId and take it from token!
+	[HttpPost("{trainingId}/participants")]
+	public async Task<IActionResult> AddParticipantToTraining(int trainingId) 
 	{
-		var response = await Sender.Send(new AddParticipantToTrainingCommand(trainingId, participantId));
+		var response = await Sender.Send(new AddParticipantToTrainingCommand(trainingId));
 
 		if (response.IsFailure)
 			return HandleFailure(response);
