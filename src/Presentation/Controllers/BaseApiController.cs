@@ -47,6 +47,15 @@ public abstract class BaseApiController : ControllerBase
 				Status = StatusCodes.Status403Forbidden
 			}),
 
+			{ Error: { ErrorType: ErrorType.Conflict } } =>
+			StatusCode(StatusCodes.Status409Conflict, new ProblemDetails
+			{
+				Title = "Conflict",
+				Type = result.Error.Code,
+				Detail = result.Error.Description,
+				Status = StatusCodes.Status409Conflict
+			}),
+
 			_ => throw new ArgumentException("Unknown error type")
 		};
 }

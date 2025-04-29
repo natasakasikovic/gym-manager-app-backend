@@ -2,4 +2,6 @@
 
 namespace Application.Common.Interfaces.Repositories;
 
-public interface ITrainingRepository : IRepository<Training> { }
+public interface ITrainingRepository : IRepository<Training> {
+	Task<bool> ExistsByTrainingTypeIdAsync(int trainingTypeId);
+}

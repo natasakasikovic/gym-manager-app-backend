@@ -1,5 +1,6 @@
 ﻿using Application.Common.Interfaces.Repositories;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Database.Repositories;
 
@@ -20,5 +21,10 @@ public class TrainingRepository : GenericRepository<Training>, ITrainingReposito
 		return await _dbContext.Trainings.Include(t => t.Type)
 			.Include(t => t.Trainer)
 			.ToListAsync();
+	}
+
+	public async Task<bool> ExistsByTrainingTypeIdAsync(int trainingTypeId)
+	{
+		return await _dbContext.Trainings.AnyAsync(t => t.Type.Id == trainingTypeId);
 	}
 }
